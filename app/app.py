@@ -110,9 +110,9 @@ R = []
 for r in user_input:
     pid = user_pids[r]
     if pid in frequent_hitters:
-        R += [[r, pid2fid[pid]]]
+        R += [[r, len(pid2fid[pid]), pid2fid[pid]]]
         done.update([r])
-df = pd.DataFrame(R, columns=["Entry", "Fragments"])
+df = pd.DataFrame(R, columns=["Entry", "Hits", "Fragments"])
 col.dataframe(df)
 
 col = columns[1]
@@ -121,7 +121,7 @@ R = []
 for r in user_input:
     pid = user_pids[r]
     if pid in normal_hitters:
-        R += [[r, len(pid2fid[pid]), pid2fid[pid]]]
+        R += [[r, len(pid2fid[pid]), sorted(pid2fid[pid])]]
         done.update([r])
 df = pd.DataFrame(R, columns=["Entry", "Hits", "Fragments"])
 col.dataframe(df)
@@ -132,7 +132,7 @@ R = []
 for r in user_input:
     pid = user_pids[r]
     if pid in specific_hitters:
-        R += [[r, len(pid2fid[pid]), pid2fid[pid]]]
+        R += [[r, len(pid2fid[pid]), sorted(pid2fid[pid])]]
         done.update([r])
 df = pd.DataFrame(R, columns=["Entry", "Hits", "Fragments"])
 col.dataframe(df)
@@ -145,7 +145,7 @@ for r in user_input:
         continue
     pid = user_pids[r]
     if pid in hek_proteome:
-        R += [[r, len(pid2fid[pid]), pid2fid[pid]]]
+        R += [[r, len(pid2fid[pid]), sorted(pid2fid[pid])]]
         done.update([r])
 df = pd.DataFrame(R, columns=["Entry", "Hits", "Fragments"])
 col.dataframe(df["Entry"])
@@ -158,7 +158,7 @@ for r in user_input:
         continue
     pid = user_pids[r]
     if pid in human_proteome:
-        R += [[r, len(pid2fid[pid]), pid2fid[pid]]]
+        R += [[r, len(pid2fid[pid]), sorted(pid2fid[pid])]]
 df = pd.DataFrame(R, columns=["Entry", "Hits", "Fragments"])
 col.dataframe(df["Entry"])
 
